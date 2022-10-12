@@ -9,7 +9,8 @@ const resetControll = async (req,res) =>{
             res.status(404).json({message:"User not exists"})
         }else{
             if(data.ResetToken == req.body.Token){
-                let result = await User.updateOne({Password:req.body.Password})
+                const hashedpassword = await encrypt(req.body.Password);
+                let result = await User.updateOne({Password:hashedpassword})
                 let Mailresponse = await mailerfunc.mailerfunc2(data.Email)
                 console.log(Mailresponse)
                 res.status(200).json({message:"Password reseted successfully"})
