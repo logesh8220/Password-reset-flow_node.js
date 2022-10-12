@@ -14,7 +14,7 @@ const forgotControll = async (req,res) =>{
         else{
             let ResetToken = await CreateToken({_id:data._id})
             await User.updateOne({ResetToken:ResetToken})
-            let Mailresponse = await mailerfunc(data.Email,data._id,ResetToken)
+            let Mailresponse = await mailerfunc.mailerfunc(data.Email,data._id,ResetToken)
             console.log(Mailresponse,"Email reseponse")
             res.json({message:"Password Reset link sended to email"})
         }
